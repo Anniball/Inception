@@ -12,7 +12,7 @@ COPY ./tools/config.sql /tmp/config.sql
 #WE WILL PROBABLY NEED A .CNF FILE TO COPY LATER
 
 #Copy .sh script to execute everything
-COPY ./srcs/config.sh ./
+COPY ./tools/config.sh ./
 
 # This execution of the  script is now the starting point
 ENTRYPOINT [ "sh", "config.sh" ]
