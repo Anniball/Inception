@@ -14,7 +14,7 @@ services:
 
 #Name of the network used by the containers to communicate
 networks:
-  inception_network
+  inception_network:
 
 #External volumes to configure for the use of the containers
 volumes:
