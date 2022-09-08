@@ -9,7 +9,7 @@ chown -R mysql:mysql /var/run/mysqld
 if [ ! -d /var/lib/mysql/$MARIADB_DATABASE ]; then
 	service mysql start
 	# Execute the .sql to setup the database
-	eval "echo \"$(cat /tmp/create_db.sql)\"" | mariadb
+	eval "echo \"$(cat /tmp/config.sql)\"" | mariadb
 	service mysql stop
 fi
 
