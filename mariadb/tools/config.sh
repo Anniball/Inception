@@ -14,3 +14,6 @@ if [ ! -d /var/lib/mysql/$MYSQL_DATABASE ]; then
 	mysqladmin -u root password $MYSQL_ROOT_PASSWORD;
 	service mysql stop
 fi
+
+#Start the database deaemon
+mysqld_safe
