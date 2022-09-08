@@ -1,0 +1,26 @@
+version : "3.9"
+
+#Services that will be built and ran
+services:
+  mariadb:
+    build: ./mariadb
+    env_file: .env
+    image: Db_image
+    restart: always
+    networks:
+      - inception_network
+    volumes:
+      - mariadb-volume:/var/lib/mysql
+
+#Name of the network used by the containers to communicate
+networks:
+  inception_network
+
+#External volumes to configure for the use of the containers
+volumes:
+  mariadb-volume:
+    driver: local
+    driver_opts:
+      device: /home/ldelmas/data/database
+      type: volume
+      o: bind

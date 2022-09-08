@@ -6,12 +6,10 @@ mkdir -p /var/run/mysqld
 chown -R mysql:mysql /var/run/mysqld
 
 #Just checking if the DB has been correctly created in the right path
-if [ ! -d /var/lib/mysql/$MYSQL_DATABASE ]; then
+if [ ! -d /var/lib/mysql/$MARIADB_DATABASE ]; then
 	service mysql start
 	# Execute the .sql to setup the database
 	eval "echo \"$(cat /tmp/create_db.sql)\"" | mariadb
-	# Set MySQL root password (if you don't set it no password at all)
-	mysqladmin -u root password $MYSQL_ROOT_PASSWORD;
 	service mysql stop
 fi
 
