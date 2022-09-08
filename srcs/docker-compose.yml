@@ -3,7 +3,7 @@ version : "3.9"
 #Services that will be built and ran
 services:
   mariadb:
-    build: ./mariadb
+    build: ./requirements/mariadb
     env_file: .env
     image: Db_image
     restart: always
