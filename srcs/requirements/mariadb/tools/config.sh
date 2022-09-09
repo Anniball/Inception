@@ -4,8 +4,8 @@ chown -R mysql:mysql /var/lib/mysql
 mkdir -p /var/run/mysqld
 #Give owner and group to that too
 chown -R mysql:mysql /var/run/mysqld
-touch /var/run/mysqld/mysqlf.pid
-mkfifo /var/run/mysqld/mysqlf.sock
+#touch /var/run/mysqld/mysqlf.pid
+mkfifo /var/run/mysqld/mysqld.sock
 
 #Just checking if the DB has been correctly created in the right path
 if [ ! -d /var/lib/mysql/$MARIADB_DATABASE ]; then
@@ -14,9 +14,9 @@ if [ ! -d /var/lib/mysql/$MARIADB_DATABASE ]; then
 	#mysqld_safe &
 
 	# Wait until MariaDB has fully started
-	while ! mysqladmin ping -h "$MARIADB_HOST" --silent; do
-		sleep 1
-	done
+	#while ! mysqladmin ping -h "$MARIADB_HOST" --silent; do
+	#	sleep 1
+	#done
 	# Execute the .sql to setup the database
 	eval "echo \"$(cat /tmp/config.sql)\"" | mariadb -u root
 	#mysql -u root -e "CREATE DATABASE $MARIADB_DATABASE";
