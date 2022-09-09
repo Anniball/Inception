@@ -1,0 +1,5 @@
+Manage MariaDB :
+	-See all databases available : "SHOW DATABASES;"
+	-Use a specific database : "USE DB_NAME;"
+	-See all column of the database : "SELECT * FROM INFORMATION_SCHEMA.COLUMNS;"
+	-See all users : "SELECT User FROM mysql.user;"

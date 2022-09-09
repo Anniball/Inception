@@ -35,4 +35,5 @@ if [ ! -d /var/lib/mysql/$MARIADB_DATABASE ]; then
 fi
 
 #Start the database daemon
+echo "--start DB daemon"
 mysqld_safe
