@@ -11,26 +11,15 @@ mkfifo /var/run/mysqld/mysqld.sock
 if [ ! -d /var/lib/mysql/$MARIADB_DATABASE ]; then
 	echo "--Starting service"
 	service mysql start
-	#mysqld_safe &
 
-	# Wait until MariaDB has fully started
-	#while ! mysqladmin ping -h "$MARIADB_HOST" --silent; do
-	#	sleep 1
-	#done
 	# Execute the .sql to setup the database
 	eval "echo \"$(cat /tmp/config.sql)\"" | mariadb -u root
-	#mysql -u root -e "CREATE DATABASE $MARIADB_DATABASE";
-	#mysql -u root -e "CREATE USER '$MARIADB_USER'@'%' IDENTIFIED BY '$MARIADB_PASSWORD'";
-	#mysql -u root -e "GRANT ALL PRIVILEGES ON $MARIADB_DATABASE.* TO '$MARIADB_USER'@'%'";
-	#mysql -u root -e "FLUSH PRIVILEGES";
 
 	echo "--Setting password"
 	# Set MySQL root password (if you don't set it no password at all)
 	mysqladmin -u root password $MARIADB_ROOT_PASSWORD;
 
-
 	echo "--Stoping service"
-	#mysqladmin shutdow
 	service mysql stop
 fi
 
