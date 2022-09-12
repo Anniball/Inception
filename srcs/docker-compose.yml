@@ -3,6 +3,7 @@ version : "3.9"
 #Services that will be built and ran
 services:
   mariadb:
+    container_name: mariadb
     build: ./requirements/mariadb
     env_file: .env
     image: db_image
@@ -17,6 +18,7 @@ services:
       timeout: 5s
       retries: 5
   wordpress:
+    container_name: wordpress
     build: ./requirements/wordpress
     depends_on:
       mariadb:
@@ -28,10 +30,18 @@ services:
       - inception_network
     volumes:
       - wordpress-volume:/var/www/html
-  # nginx:
-  #   build: ./requirements/nginx
-  #   depends_on:
-  #     - wordpress
+  nginx:
+    container_name: nginx
+    build: ./requirements/nginx
+    depends_on:
+      - wordpress
+    networks:
+      - inception_network
+    ports:
+      - "443:443"
+    restart: unless-stopped
+    volumes:
+      - "wordpress-volume:/var/www/html"
 
 #Name of the network used by the containers to communicate
 networks:
