@@ -6,11 +6,20 @@ services:
     build: ./requirements/mariadb
     env_file: .env
     image: db_image
-    restart: always
+    restart: unless-stopped
     networks:
       - inception_network
     volumes:
       - mariadb-volume:/var/lib/mysql
+  wordpress:
+    build: ./requirements/wordpress
+    env_file: .env
+    image: wp_image
+    restart: unless-stopped
+    networks:
+      - inception_network
+    volumes:
+      -wordpress-volume:/var/www/html
 
 #Name of the network used by the containers to communicate
 networks:
@@ -22,5 +31,11 @@ volumes:
     driver: local
     driver_opts:
       device: /home/ldelmas/data/database
+      type: volume
+      o: bind
+  wordpress-volume:
+    driver: local
+    driver_opts:
+      device: /home/ldelmas/data/wordpress
       type: volume
       o: bind

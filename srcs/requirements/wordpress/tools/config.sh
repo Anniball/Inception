@@ -20,14 +20,20 @@ fi
 
 # Wordpress installing
 if ! wp core is-installed --allow-root; then
-	wp core install --url="$WP_URL" --title="$WP_TITLE" --admin_user="$WP_ADMIN_USER" --admin_password="$WP_ADMIN_PWD" --admin_email="$WP_ADMIN_EMAIL" --skip-email
+	wp core install --url="$WORDPRESS_URL" \
+					--title="$WORDPRESS_TITLE" \
+					--admin_user="$WORDPRESS_ADMIN_USER" \
+					--admin_password="$WORDPRESS_ADMIN_PWD" \
+					--admin_email="$WORDPRESS_ADMIN_EMAIL" \
+					--skip-email
 fi
 
 # Simple update for wordpress 
 wp plugin update --all
 
 # Create user (check how simon does it)
-wp user create $WP_USER $WP_USER_EMAIL --role=editor --user_pass=$WP_USER_PWD
+wp user create $WORDPRESS_USER $WORDPRESS_USER_EMAIL --role=editor \
+													--user_pass=$WORDPRESS_USER_PWD
 # Create article example 
 wp post generate --count=1 --post_title="example-post"
 

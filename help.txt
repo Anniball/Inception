@@ -1,3 +1,9 @@
+Start a terminal in the container : 
+	-sudo docker exec -it $CONTAINER_ID bash
+
+Start MariaDB/MySQL as root once in terminal :
+	-mysql --user=root --password=wp_root_pwd
+
 Manage MariaDB :
 	-See all databases available : "SHOW DATABASES;"
 	-Use a specific database : "USE DB_NAME;"

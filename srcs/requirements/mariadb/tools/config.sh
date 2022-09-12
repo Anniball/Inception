@@ -18,9 +18,7 @@ if [ ! -d /var/lib/mysql/$MARIADB_DATABASE ]; then
 	echo "--Setting password"
 	# Set MySQL root password (if you don't set it no password at all)
 	mysqladmin -u root password $MARIADB_ROOT_PASSWORD;
-
-	echo "--Stoping service"
-	service mysql stop
+	echo "--Service stopped"
 fi
 
 #Start the database daemon
