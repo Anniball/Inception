@@ -19,7 +19,7 @@ services:
     networks:
       - inception_network
     volumes:
-      -wordpress-volume:/var/www/html
+      - wordpress-volume:/var/www/html
 
 #Name of the network used by the containers to communicate
 networks:

@@ -27,6 +27,6 @@ WORKDIR /var/www/html/wordpress
 RUN wp core download --allow-root
 RUN chown -R www-data:www-data /var/www/html
 
-COPY tools/wp-config.php ./wp-congif.php
+COPY tools/wp-config.php ./wp-config.php
 
 ENTRYPOINT ["sh", "/tmp/wordpress/config.sh"]
