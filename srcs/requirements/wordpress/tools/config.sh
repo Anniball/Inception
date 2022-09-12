@@ -28,11 +28,13 @@ if ! wp core is-installed --allow-root; then
 					--admin_password="$WORDPRESS_ADMIN_PWD" \
 					--admin_email="$WORDPRESS_ADMIN_EMAIL" \
 					--skip-email
+					--allow-root
+
 fi
 
 # Simple update for wordpress 
 echo "--Updating wordpress"
-wp plugin update --all
+wp plugin update --all --allow-root
 
 # Create user (check how simon does it)
 echo "--Creating example user"
