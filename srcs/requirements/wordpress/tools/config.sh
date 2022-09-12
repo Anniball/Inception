@@ -27,7 +27,7 @@ if ! wp core is-installed --allow-root; then
 					--admin_user="$WORDPRESS_ADMIN_USER" \
 					--admin_password="$WORDPRESS_ADMIN_PWD" \
 					--admin_email="$WORDPRESS_ADMIN_EMAIL" \
-					--skip-email
+					--skip-email \
 					--allow-root
 
 fi
@@ -39,12 +39,13 @@ wp plugin update --all --allow-root
 # Create user (check how simon does it)
 echo "--Creating example user"
 wp user create $WORDPRESS_USER $WORDPRESS_USER_EMAIL --role=editor \
-													--user_pass=$WORDPRESS_USER_PWD
+													--user_pass=$WORDPRESS_USER_PWD \
+													--allow-root
 # Create article example 
 echo "--Creating example article"
-wp post generate --count=1 --post_title="example-post"
+wp post generate --count=1 --post_title="example-post" --allow-root
 
 # We need this FastCGI Process Manager to run wordpress but also so that the container keeps running
 # --nodaemonize == keep foreground
 echo "--Starting "
-php-fpm7 --nodaemonize
+php-fpm7.3 --nodaemonize
