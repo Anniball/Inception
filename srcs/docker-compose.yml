@@ -11,8 +11,16 @@ services:
       - inception_network
     volumes:
       - mariadb-volume:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-u", "$MARIADB_USER", "-p$MARIADB_PASSWORD"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
   wordpress:
     build: ./requirements/wordpress
+    depends_on:
+      mariadb:
+        condition: service_healthy
     env_file: .env
     image: wp_image
     restart: unless-stopped
@@ -20,6 +28,10 @@ services:
       - inception_network
     volumes:
       - wordpress-volume:/var/www/html
+  # nginx:
+  #   build: ./requirements/nginx
+  #   depends_on:
+  #     - wordpress
 
 #Name of the network used by the containers to communicate
 networks:
