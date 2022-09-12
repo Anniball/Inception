@@ -6,7 +6,10 @@ RUN apt-get upgrade -y
 #Nginx will be our server. openSSL will allow us to communicate securely using TLS protocol (kind of SSL improved).
 RUN apt-get install nginx -y openssl
 
-COPY tool/nginx.conf /etc/nginx/sites-enabled/default.conf
+COPY tools/nginx.conf /etc/nginx/sites-enabled/default.conf
+
+# Create directory for the certificate and the key
+RUN mkdir -p /etc/ssl
 
 # Generate certificate and key
 #	req = Creates and processes certificate requests
@@ -16,8 +19,8 @@ COPY tool/nginx.conf /etc/nginx/sites-enabled/default.conf
 #		-keyout $FILENAME = where to write the private key
 #		-subj = set subject (me) infos 
 RUN 	openssl req -x509 -nodes \
-		-out /etc/nginx/ssl/ldelmas.42.fr.crt \	
-		-keyout /etc/nginx/ssl/ldelmas.42.fr.key \
+		-out /etc/ssl/nginx-selfsigned.crt \	
+		-keyout /etc/ssl/nginx-selfsigned.key \
 		-subj "/C=BE/ST=Belgium/L=Brussels/O=42/OU=19/CN=ldelmas.42.fr/UID=ldelmas"
 
 #daemon off -> make nginx run in the foreground
