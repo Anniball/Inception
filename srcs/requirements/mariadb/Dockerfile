@@ -10,7 +10,8 @@ RUN apt-get install mariadb-server -y
 COPY ./tools/config.sql /tmp/config.sql
 
 #Copy more configuration details given in the .cnf
-COPY tools/mariadb.cnf /etc/my.cnf.d/
+COPY tools/mariadb.cnf /etc/mariadb.cnf
+COPY tools/mariadb.cnf /etc/mysql/mariadb.cnf
 
 #Copy .sh script to execute everything
 COPY ./tools/config.sh ./
