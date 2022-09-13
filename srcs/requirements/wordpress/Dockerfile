@@ -10,7 +10,7 @@ RUN	apt-get install -y php7.3 php7.3-fpm php7.3-mysql curl
 WORKDIR /tmp/wordpress/
 
 # Use of a www.conf seems a little bit too complicated for me as we can just put some more info in the basic one using shell
-# COPY tools/www.conf /etc/php/7.3/fpm/pool.d
+COPY tools/www.conf /etc/php/7.3/fpm/pool.d
 
 COPY tools/config.sh /tmp/wordpress/
 #Not sure if needed
