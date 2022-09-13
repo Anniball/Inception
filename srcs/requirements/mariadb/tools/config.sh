@@ -16,7 +16,7 @@ if [ ! -d /var/lib/mysql/$MARIADB_DATABASE ]; then
 	eval "echo \"$(cat /tmp/config.sql)\"" | mariadb -u root
 
 	# Set MySQL root password (if you don't set it no password at all)
-	mysqladmin -u root password=$MARIADB_ROOT_PASSWORD;
+	mysqladmin -u root password $MARIADB_ROOT_PASSWORD;
 	echo "--Password set"
 
 	service mysql stop --datadir=/var/lib/mysql

@@ -10,9 +10,6 @@ define( 'DB_USER', getenv('MARIADB_USER') );
 define( 'DB_PASSWORD', getenv('MARIADB_PASSWORD') );
 define( 'DB_HOST', getenv('MARIADB_HOST'));
 
-print "HELLO EVERYONE";
-print getenv('MARIADB_HOST');
-
 # Database charset to use in creating database tables.
 define( 'DB_CHARSET', 'utf8' );
 # The database collate type (sorting rules, case and accent sensitivies). 
