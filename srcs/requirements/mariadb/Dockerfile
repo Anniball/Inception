@@ -4,7 +4,7 @@ RUN apt-get update
 RUN apt-get upgrade -y
 
 #MariaDB will be our database
-RUN apt-get install mariadb-server -y 
+RUN apt-get install mariadb-server -y
 
 #Copy database creation and configutation
 COPY ./tools/config.sql /tmp/config.sql

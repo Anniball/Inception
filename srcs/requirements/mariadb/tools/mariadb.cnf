@@ -1,4 +1,13 @@
 # More configuration details for mariaDB
-[client-server] #We need it to precise address and port
+[galera] #We need it to precise address and port
 bind-address=0.0.0.0
 port=3306
+
+#[client-server]
+
+#!includedir /etc/mysql/conf.d
+#!includedir /etc/mysql/mariadb.conf.d
+
+#[mysqld]
+#skip-networking=false
+#skip-bind-address

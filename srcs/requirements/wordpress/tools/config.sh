@@ -1,23 +1,27 @@
 # The www.conf file is needed for communication with the server
-grep -E "listen = 127.0.0.1" "/etc/php7/php-fpm.d/www.conf" > /dev/null 2>&1
+grep -E "listen = 9000" "/etc/php/7.3/fpm/pool.d/www.conf" > /dev/null 2>&1
 
 # If not found it's useless to modify it (errors will be written in /dev/null)
-if [ $? -eq 0 ]; then
+if [ $? -ne 0 ]; then
 	echo "--Modifying configuration file"
 	# Replacing the listen part
-	sed -i "s|.*listen = 127.0.0.1.*|listen = 9000|g" "/etc/php7/php-fpm.d/www.conf"
+	sed -i "s|.*listen = /run/php/php7.3-fpm.sock.*|listen = 9000|g" "/etc/php/7.3/fpm/pool.d/www.conf" 
 
 	# Adding the needed env variables to connext to DB
-	echo "env[MARIADB_HOST] = \$MARIADB_HOST" >> "/etc/php7/php-fpm.d/www.conf"
-	echo "env[MARIADB_USER] = \$MARIADB_USER" >> "/etc/php7/php-fpm.d/www.conf"
-	echo "env[MARIADB_PWD] = \$MARIADB_PASSWORD" >> "/etc/php7/php-fpm.d/www.conf"
-	echo "env[MARIADB_DB] = \$MARIADB_DATABASE" >> "/etc/php7/php-fpm.d/www.conf"
+	echo "env[MARIADB_HOST] = $MARIADB_HOST" >> "/etc/php/7.3/fpm/pool.d/www.conf" 
+	echo "env[MARIADB_USER] = $MARIADB_USER" >> "/etc/php/7.3/fpm/pool.d/www.conf"
+	echo "env[MARIADB_PWD] = $MARIADB_PASSWORD" >> "/etc/php/7.3/fpm/pool.d/www.conf"
+	echo "env[MARIADB_DB] = $MARIADB_DATABASE" >> "/etc/php/7.3/fpm/pool.d/www.conf"
 fi
 
-# We have to wait a bit or else the next steps will be skipped
-# In the meantime, connection to database is happening
-# COMMENTED SINCE I'M NOT SURE IF NEEDED
-# sleep 5 
+rm -rf /var/www/html/wordpress/wp-config.php
+wp config create --dbname=$MARIADB_DATABASE \
+		--dbuser=$MARIADB_USER \
+		--dbpass=$MARIADB_PASSWORD \
+		--dbhost=$MARIADB_HOST \
+		--path="/var/www/html/wordpress/" \
+		--allow-root \
+		--skip-check
 
 # Wordpress installing
 if ! wp core is-installed --allow-root; then
