@@ -16,7 +16,8 @@ services:
       test: ["CMD", "mysqladmin", "ping", "-u", "$MARIADB_USER", "-p$MARIADB_PASSWORD"]
       interval: 10s
       timeout: 5s
-      retries: 5
+      retries: 15
+
   wordpress:
     container_name: wordpress
     build: ./requirements/wordpress
@@ -30,6 +31,7 @@ services:
       - inception_network
     volumes:
       - wordpress-volume:/var/www/html
+      
   nginx:
     container_name: nginx
     build: ./requirements/nginx

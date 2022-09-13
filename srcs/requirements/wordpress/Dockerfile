@@ -13,13 +13,24 @@ WORKDIR /tmp/wordpress/
 # COPY tools/www.conf /etc/php/7.3/fpm/pool.d
 
 COPY tools/config.sh /tmp/wordpress/
+
+#Modif :
+RUN chmod +x /tmp/wordpress/config.sh
+
 #Not sure if needed
 RUN mkdir -p /run/php
 
 #Installing WordPress CLI (Don't know if I'll use it since I'm writing a wp-config.php)
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+
+#Modif :
+RUN php wp-cli.phar --info
+
 RUN chmod +x wp-cli.phar
 RUN mv wp-cli.phar /usr/local/bin/wp
+
+#Modif:
+RUN wp cli update
 
 WORKDIR /var/www/html/wordpress
 

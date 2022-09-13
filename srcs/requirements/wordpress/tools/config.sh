@@ -8,10 +8,10 @@ if [ $? -ne 0 ]; then
 	sed -i "s|.*listen = /run/php/php7.3-fpm.sock.*|listen = 9000|g" "/etc/php/7.3/fpm/pool.d/www.conf" 
 
 	# Adding the needed env variables to connext to DB
-#	echo "env[MARIADB_HOST] = \$MARIADB_HOST" >> "/etc/php/7.3/fpm/pool.d/www.conf" 
-#	echo "env[MARIADB_USER] = \$MARIADB_USER" >> "/etc/php/7.3/fpm/pool.d/www.conf"
-#	echo "env[MARIADB_PWD] = \$MARIADB_PASSWORD" >> "/etc/php/7.3/fpm/pool.d/www.conf"
-#	echo "env[MARIADB_DB] = \$MARIADB_DATABASE" >> "/etc/php/7.3/fpm/pool.d/www.conf"
+	echo "env[MARIADB_HOST] = \$MARIADB_HOST" >> "/etc/php/7.3/fpm/pool.d/www.conf" 
+	echo "env[MARIADB_USER] = \$MARIADB_USER" >> "/etc/php/7.3/fpm/pool.d/www.conf"
+	echo "env[MARIADB_PWD] = \$MARIADB_PASSWORD" >> "/etc/php/7.3/fpm/pool.d/www.conf"
+	echo "env[MARIADB_DB] = \$MARIADB_DATABASE" >> "/etc/php/7.3/fpm/pool.d/www.conf"
 fi
 
 rm -rf /var/www/html/wordpress/wp-config.php
