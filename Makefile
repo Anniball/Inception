@@ -10,7 +10,7 @@ all:
 	echo "127.0.0.1 ldelmas.42.fr" >> /etc/hosts
 	echo "127.0.0.1 www.ldelmas.42.fr" >> /etc/hosts
 	#Running every coontainers (will use detach to make them as background tasks)
-	docker-compose -f srcs/docker-compose.yml up #--detach
+	docker-compose -f srcs/docker-compose.yml up --detach
 
 build:
 	docker-compose -f srcs/docker-compose.yml build

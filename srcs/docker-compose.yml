@@ -6,7 +6,7 @@ services:
     container_name: mariadb
     build: ./requirements/mariadb
     env_file: .env
-    image: db_image
+    image: mariadb
     restart: unless-stopped
     networks:
       - inception_network
@@ -24,7 +24,7 @@ services:
       mariadb:
         condition: service_healthy
     env_file: .env
-    image: wp_image
+    image: wordpress
     restart: unless-stopped
     networks:
       - inception_network
@@ -39,6 +39,7 @@ services:
       - inception_network
     ports:
       - "443:443"
+    image: nginx
     restart: unless-stopped
     volumes:
       - "wordpress-volume:/var/www/html"
