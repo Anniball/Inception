@@ -1,13 +1,4 @@
 # More configuration details for mariaDB
 [galera] #We need it to precise address and port
-bind-address=0.0.0.0
-port=3306
-
-#[client-server]
-
-#!includedir /etc/mysql/conf.d
-#!includedir /etc/mysql/mariadb.conf.d
-
-#[mysqld]
-#skip-networking=false
-#skip-bind-address
+bind-address=0.0.0.0 #mariadb may bind to any network interface
+port=3306 #port requested by the subject. It's the default port for mariadb but we precise it by security

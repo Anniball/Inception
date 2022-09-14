@@ -8,9 +8,9 @@ if [ ! -d /var/lib/mysql/$MARIADB_DATABASE ]; then
 
 	# Create a folder for the daemon (mysql server’s socket file)
 	mkdir -p /var/run/mysqld
-	# Setting up .pid and .sock since they're not automatically set
+	# Setting up .pid if it's not automatically set 
+	# .sock file has been automatically created at this point
 	touch /var/run/mysqld/mysqlf.pid
-	#mkfifo /var/run/mysqld/mysqld.sock
 
 	# Execute the .sql to setup the database
 	eval "echo \"$(cat /tmp/config.sql)\"" | mariadb -u root
@@ -26,7 +26,7 @@ else
 	mkdir -p /var/run/mysqld
 	#Setting up .pid and .sock since they're not automatically set
 	touch /var/run/mysqld/mysqlf.pid
-	#mkfifo /var/run/mysqld/mysqld.sock
+	mkfifo /var/run/mk
 fi
 
 #Give owner and group to that too
